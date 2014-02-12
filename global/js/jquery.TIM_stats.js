@@ -65,6 +65,39 @@
         return this;
 
     };
+    
+    $.fn.gruposTeams = function( params ) {
+
+        var settings = $.extend( {
+            idTorneo: false,
+            title: 'Director Técnico',
+            template: 'mix_smex_dt_01',
+            lblFullName: 'Nombre Completo: ',
+            lblPosicion: 'Posición: ',
+            lblFechaNac: 'Fecha de nacimiento: ',
+            lblLugarNac: 'Lugar de nacimiento: ',
+            lblNacionalidad: 'Nacionalidad: ',
+            lblLoading: '<b>LOADING.....</b>'
+        }, params);
+
+        if ( !settings.idTorneo ) {
+            return '';
+        }
+        
+        // $objGlobal = $(this);
+        // objSettings = settings;
+        // domain = 'http://feeds-televisadeportes.dev/data/tecnicos/'+settings.idTorneo+'.js';
+        // jsonpCallback = 'stadisticDT';
+        
+        // token();
+        var html = createHTML_gruposTeams();
+        
+        $(this).delay( 8000 ).html( html );
+        $(this).children('div').fadeIn( 4000 );
+        
+        return this;
+
+    };
 
     function token() {
         
@@ -164,6 +197,38 @@
         return html;
     };
     
+    function createHTML_gruposTeams( data ) {
+        var html = '';
+
+        html += '<div class="wdg_smex_groups_01" data-enhance="false" style="display:none">';
+          html += '<div class="titulo_goal textcolor-title4">Hexagonal</div>';
+          html += '<div class="scroll">';
+            html += '<div class="goal">';
+              html += '<ul class="head_team textcolor-title4">';
+                html += '<li>JJ</li>';
+                html += '<li>JG</li>';
+                html += '<li>JE</li>';
+                html += '<li>JP</li>';
+                html += '<li>PTS</li>';
+              html += '</ul>';
+              html += '<div class="team_divisor">';
+                html += '<ul class="team">';
+                  html += '<li class="first_child dotted-right"><p>Panama</p></li>';
+                  html += '<li class="textcolor-title4 dotted-right"><p>6</p></li>';
+                  html += '<li class="textcolor-title4 dotted-right"><p>6</p></li>';
+                  html += '<li class="textcolor-title4 dotted-right"><p>6</p></li>';
+                  html += '<li class="textcolor-title4 dotted-right"><p>6</p></li>';
+                  html += '<li class="last_child textcolor-title4"><p>6</p></li>';
+                html += '</ul>';
+              html += '</div>';
+            html += '</div>';
+          html += '</div>';
+        html += '</div>';
+        
+
+        return html;
+    };
+    
     function createTable( data ) {
         var dataAux = "";
         var html = "";
@@ -194,13 +259,14 @@
     }
     
     function successData( data ) {
-        
         var html = "";
         
-        switch( objSettings.template ) {
+        switch( objSettings.template )
+        {
           case 'wdg_teams_classification_01': 
             html = createHTML_teamsClassification( data );
           break;
+          
           case 'mix_smex_dt_01': 
             html = createHTML_stadisticDT( data );
           break;
