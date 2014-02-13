@@ -33,8 +33,6 @@
 
     };
     
-    
-
     function token() {
         
         $objGlobal.html(objSettings.loading);
@@ -55,8 +53,6 @@
             }
         });
     };
-
-    
     
     function createHTML data ) {
         var html = '';
@@ -102,10 +98,7 @@
     
     function successData( data ) {
         var html = "";
-        
-         
         html = createHTML( data );
-        
         
         $objGlobal.delay( 8000 ).html( html );
         $objGlobal.children('div').fadeIn( 4000 );
