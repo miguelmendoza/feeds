@@ -54,7 +54,7 @@
         });
     };
     
-    function createHTML data ) {
+    function createHTML ( data ) {
         var html = '';
 
         html += '<div class="mix_smex_dt_01" data-enhance="false" style="display:none">';
