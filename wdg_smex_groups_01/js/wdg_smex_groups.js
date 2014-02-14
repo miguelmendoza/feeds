@@ -106,7 +106,6 @@
                             {
                                 if( data.dataFases[i].dataJornadas[k].idTeam == arrItems[0].dataEstadistica[j].idTeam )
                                 {
-                                    console.log( arrItems[0].dataEstadistica[j] );
                                     html += '<li class="first_child dotted-right"><p>'+arrItems[0].dataEstadistica[j].nameTeam+'</p></li>';
                                     html += '<li class="textcolor-title4 dotted-right"><p>'+arrItems[0].dataEstadistica[j].dataEstadisticas.JJ+'</p></li>';
                                     html += '<li class="textcolor-title4 dotted-right"><p>'+arrItems[0].dataEstadistica[j].dataEstadisticas.JG+'</p></li>';
