@@ -1,8 +1,7 @@
 ;(function($){
     var $objGlobal = false;
     var objSettings = false;
-    var domain = 'http://feeds-televisadeportes.dev/';
-    var jsonpCallback = false;
+    var domain = 'http://feeds-televisadeportes.dev/data/';
     
     $.fn.teamsClassification = function( params ) {
 
@@ -10,7 +9,6 @@
             idTorneo: false,
             title: 'Clasificación',
             urlWidget: 'http://televisadeportes.esmas.com/',
-            template: 'wdg_teams_classification_01',
             lblNUM: '<i class="tvsa-hash"></i>',
             lblEQUIPO: 'EQUIPO',
             lblPJ: 'PJ',
@@ -20,6 +18,7 @@
             lblPrev: 'Anterior',
             lblViewMore: 'Ver todos',
             lblLoading: '<b>LOADING.....</b>',
+            template: 'deportes',
             upperCase: true
         }, params);
 
@@ -28,39 +27,27 @@
         } 
 
         $objGlobal = $(this);
-        urlToken = domain+'data/'+objSettings.idTorneo+'/tablageneral.js';
+        urlToken = objSettings.idTorneo+'/tablageneral.js';
         jsonpCallback = 'teamsClassification';
         
+        
         token(urlToken);
+        
         return this;
 
     };
     
-    var token = function ( urlToken ) {
-        $objGlobal.html(objSettings.loading);
-        $.ajax({
-            type: 'GET',
-            url: urlToken,
-            async: false,
-            jsonpCallback: jsonpCallback,
-            contentType: "application/json",
-            dataType: 'jsonp',
-            cache: false,
-            success: successData,
-            error: function(xhr, ajaxOptions, thrownError) {
-                $objGlobal.html('');
-            }
-        });
-    };
-    
-    var successData = function ( data ) {
+    successData = function ( data ) {
         var html = "";
-        html = createHTML( data );
+        
+        switch( objSettings.template ) {
+            case 'deportes': html = createHTML_Mundial( data ); break;
+        }
         $objGlobal.delay( 8000 ).html( html );
         $objGlobal.children('div').fadeIn( 4000 );
     }
     
-    var createHTML = function ( data ) {
+    createHTML_Mundial = function ( data ) {
         var html = '';
         
         htmlData = processData( data );

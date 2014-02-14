@@ -1,10 +1,9 @@
-;(function( $ ) {
 
-    function token() {
+    token = function () {
 
         $.ajax({
             type: 'GET',
-            url: domain,
+            url: 'http://feeds-televisadeportes.dev/data/'+urlToken,
             async: false,
             jsonpCallback: jsonpCallback,
             contentType: "application/json",
@@ -18,10 +17,3 @@
             }
         });
     };
-
-    
-    function successData( data ) {
-        
-    }
-
-})(jQuery);

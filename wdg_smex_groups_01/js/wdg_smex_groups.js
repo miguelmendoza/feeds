@@ -37,7 +37,7 @@
         $objGlobal.html(objSettings.loading);
 
         $.ajax({
-            type: 'GET',
+            type: 'POST',
             url: 'http://feeds-televisadeportes.dev/data/'+domain,
             async: false,
             jsonpCallback: jsonpCallback,
