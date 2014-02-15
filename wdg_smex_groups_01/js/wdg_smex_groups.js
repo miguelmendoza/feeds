@@ -2,8 +2,8 @@
     
     var $objGlobal = false;
     var objSettings = false;
-    var domain = false;
-    var jsonpCallback = false;
+    // var domain = false;
+    // var jsonpCallback = false;
     var arrItems = new Array();
     
     $.fn.gruposTeams = function( params ) {
@@ -23,32 +23,13 @@
         }
         
         $objGlobal = $(this);
-        domain = objGlobal.idTorneo+'/tablafase_'+objGlobal.idFase+'.js';
+        urlToken = objGlobal.idTorneo+'/tablafase_'+objGlobal.idFase+'.js';
         jsonpCallback = 'phasesbytorneo';
         
         token();
         
         return this;
 
-    };
-    
-    var token = function () {
-        
-        $objGlobal.html(objSettings.loading);
-
-        $.ajax({
-            type: 'POST',
-            url: 'http://feeds-televisadeportes.dev/data/'+domain,
-            async: false,
-            jsonpCallback: jsonpCallback,
-            contentType: "application/json",
-            dataType: 'jsonp',
-            cache: false,
-            success: successData,
-            error: function(xhr, ajaxOptions, thrownError) {
-                $objGlobal.html('');
-            }
-        });
     };
     
     var token2 = function () {

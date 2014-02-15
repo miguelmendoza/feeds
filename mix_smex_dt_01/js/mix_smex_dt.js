@@ -2,8 +2,7 @@
     
     var $objGlobal = false;
     var objSettings = false;
-    var domain = false;
-    var jsonpCallback = false;
+    // var domain = false;
     
     $.fn.stadisticDT = function( params ) {
 
@@ -25,7 +24,7 @@
         
         $objGlobal = $(this);
         objSettings = settings;
-        domain = 'http://feeds-televisadeportes.dev/data/tecnicos/'+settings.idDT+'.js';
+        urlToken = 'tecnicos/'+settings.idDT+'.js';
         jsonpCallback = 'stadisticDT';
         
         token();
@@ -33,26 +32,13 @@
 
     };
     
-    function token() {
+    successData = function ( data ) {
+        var html = "";
+        html = createHTML( data );
         
-        $objGlobal.html(objSettings.loading);
-
-        $.ajax({
-            type: 'GET',
-            url: domain,
-            async: false,
-            jsonpCallback: jsonpCallback,
-            contentType: "application/json",
-            dataType: 'jsonp',
-            cache: false,
-            success: successData,
-            error: function(xhr, ajaxOptions, thrownError) {
-                $objGlobal.html('');
-                console.log(thrownError);
-                console.log("Algo Fallo");
-            }
-        });
-    };
+        $objGlobal.delay( 8000 ).html( html );
+        $objGlobal.children('div').fadeIn( 4000 );
+    }
     
     function createHTML ( data ) {
         var html = '';
@@ -96,12 +82,6 @@
         return html;
     };
     
-    function successData( data ) {
-        var html = "";
-        html = createHTML( data );
-        
-        $objGlobal.delay( 8000 ).html( html );
-        $objGlobal.children('div').fadeIn( 4000 );
-    }
+    
 
 })(jQuery);
