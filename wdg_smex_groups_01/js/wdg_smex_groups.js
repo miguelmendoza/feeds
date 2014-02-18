@@ -2,8 +2,6 @@
     
     var $objGlobal = false;
     var objSettings = false;
-    // var domain = false;
-    // var jsonpCallback = false;
     var arrItems = new Array();
     
     $.fn.gruposTeams = function( params ) {

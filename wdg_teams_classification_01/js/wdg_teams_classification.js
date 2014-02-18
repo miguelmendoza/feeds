@@ -1,7 +1,6 @@
 ;(function($){
     var $objGlobal = false;
     var objSettings = false;
-    var domain = 'http://feeds-televisadeportes.dev/data/';
     
     $.fn.teamsClassification = function( params ) {
 
@@ -27,7 +26,7 @@
         } 
 
         $objGlobal = $(this);
-        urlToken = objSettings.idTorneo+'/tablageneral.js';
+        urlToken = objSettings.idTorneo+'/teamsclassification.js';
         jsonpCallback = 'teamsClassification';
         
         

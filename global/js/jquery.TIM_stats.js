@@ -3,7 +3,7 @@
 
         $.ajax({
             type: 'GET',
-            url: 'http://feeds-televisadeportes.dev/data/'+urlToken,
+            url: 'http://static-televisadeportes.esmas.com/sportsdata/futbol/data/'+urlToken,
             async: false,
             jsonpCallback: jsonpCallback,
             contentType: "application/json",
@@ -12,8 +12,13 @@
             success: successData,
             error: function(xhr, ajaxOptions, thrownError) {
                 $objGlobal.html('');
-                console.log(thrownError);
-                console.log("Algo Fallo");
             }
         });
     };
+    
+    clearUrlString = function(text){
+        text = text.trim();
+        text = text.toLowerCase();
+        text = text.replace(" ","-");
+        return text;
+    }
