@@ -11,7 +11,7 @@
             lblNUM: '<i class="tvsa-hash"></i>',
             lblEQUIPO: 'EQUIPO',
             lblPJ: 'PJ',
-            lblPG: 'G',
+            lblPG: 'G', 
             lblPTS: 'PTS',
             lblNext: 'Siguiente',
             lblPrev: 'Anterior',
