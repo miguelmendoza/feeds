@@ -2,14 +2,13 @@
     
     var $objGlobal = false;
     var objSettings = false;
-    // var domain = false;
     
     $.fn.stadisticDT = function( params ) {
 
         var settings = $.extend( {
             idDT: false,
             title: 'Director Técnico',
-            template: 'mix_smex_dt_01',
+            template: 'mundial',
             lblFullName: 'Nombre Completo: ',
             lblPosicion: 'Posición: ',
             lblFechaNac: 'Fecha de nacimiento: ',
@@ -24,7 +23,7 @@
         
         $objGlobal = $(this);
         objSettings = settings;
-        urlToken = 'tecnicos/'+settings.idDT+'.js';
+        urlToken = 'coaches/coach_'+settings.idDT+'.js';
         jsonpCallback = 'stadisticDT';
         
         token();
@@ -32,15 +31,33 @@
 
     };
     
-    successData = function ( data ) {
+    var token = function () {
+
+        $.ajax({
+            type: 'GET',
+            url: 'http://static-televisadeportes.esmas.com/sportsdata/futbol/data/'+urlToken,
+            async: false,
+            jsonpCallback: jsonpCallback,
+            contentType: "application/json",
+            dataType: 'jsonp',
+            cache: false,
+            success: successData,
+            error: function(xhr, ajaxOptions, thrownError) {
+                $objGlobal.html('');
+            }
+        });
+    };
+    
+    var successData = function ( data ) {
         var html = "";
         html = createHTML( data );
         
         $objGlobal.delay( 8000 ).html( html );
+        
         $objGlobal.children('div').fadeIn( 4000 );
     }
     
-    function createHTML ( data ) {
+    var createHTML = function ( data ) {
         var html = '';
 
         html += '<div class="mix_smex_dt_01" data-enhance="false" style="display:none">';
@@ -82,6 +99,21 @@
         return html;
     };
     
+    
+    var loadimg = function( imgsrc ) {
+        
+        $objGlobal.find('mix_img').find('img').load( imgsrc, function ( response, status, xhr ) {
+            alert('La imagen se cargada');
+            
+            if ( status == "error" ) {
+      var msg = "Sorry but there was an error: ";
+      $( "#error" ).html( msg + xhr.status + " " + xhr.statusText );
+    }
+            
+          }
+        );
+        
+    };
     
 
 })(jQuery);

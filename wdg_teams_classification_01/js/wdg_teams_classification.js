@@ -17,7 +17,7 @@
             lblPrev: 'Anterior',
             lblViewMore: 'Ver todos',
             lblLoading: '<b>LOADING.....</b>',
-            template: 'deportes',
+            template: 'mundial',
             upperCase: true
         }, params);
 
@@ -29,6 +29,7 @@
         urlToken = objSettings.idTorneo+'/teamsclassification.js';
         jsonpCallback = 'teamsClassification';
         
+        $objGlobal.html( objSettings.lblLoading );
         
         token(urlToken);
         
@@ -36,17 +37,42 @@
 
     };
     
-    successData = function ( data ) {
+    var successData = function ( data ) {
         var html = "";
         
         switch( objSettings.template ) {
-            case 'deportes': html = createHTML_Mundial( data ); break;
+            case 'deportes': html = createHTML_Deportes( data ); break;
+            case 'mundial': html = createHTML_Mundial( data ); break;
         }
         $objGlobal.delay( 8000 ).html( html );
         $objGlobal.children('div').fadeIn( 4000 );
     }
     
-    createHTML_Mundial = function ( data ) {
+    var token = function () {
+
+        $.ajax({
+            type: 'GET',
+            url: 'http://static-televisadeportes.esmas.com/sportsdata/futbol/data/'+urlToken,
+            async: false,
+            jsonpCallback: jsonpCallback,
+            contentType: "application/json",
+            dataType: 'jsonp',
+            cache: false,
+            success: successData,
+            error: function(xhr, ajaxOptions, thrownError) {
+                $objGlobal.html('');
+            }
+        });
+    };
+    
+    var clearUrlString = function(text){
+        text = text.trim();
+        text = text.toLowerCase();
+        text = text.replace(" ","-");
+        return text;
+    }
+    
+    var createHTML_Deportes = function ( data ) {
         var html = '';
         
         htmlData = processData( data );
@@ -82,6 +108,48 @@
         html += '<table class="ver_todos"><tbody><tr><td><a href="'+objSettings.urlWidget+'">'+objSettings.lblViewMore+'</a></td></tr></tbody></table></div>';
         html += '<div class="wdg_stadistics_01_clear"></div></div><div class="degraded"></div>';
         html += '<div class="seemore"><a href="'+objSettings.urlWidget+'">'+objSettings.lblViewMore+'</a></div></div>';
+
+        return html;
+    };
+    
+    var createHTML_Mundial = function ( data ) {
+        var html = '';
+        
+        htmlData = processData( data );
+        if ( !htmlData ) {
+            return '';
+        }
+        
+        html += '<div class="wdg_teams_classification_01" data-enhance="false" style="display:none">';
+        
+        html += '<div class="str_pleca_01">';
+        
+          html += '<div class="str_pleca_01_title">';
+            html += '<h3 class="background-color-pleca1">';
+              html += '<a href="'+objSettings.urlWidget+'" title="'+objSettings.urlWidget+'" class="textcolor-title3">'+objSettings.title;
+                html += '<span class="str_pleca_01_arrowa selected"></span><span class="str_pleca_01_arrowb"></span></a>';
+            html += '</h3></div></div>';
+
+        
+        
+        html += '<table class="titulo"><tbody><tr><th class="izq textcolor-title1">'+objSettings.lblNUM+'</th>';
+        html += '<th class="der_img textcolor-title1">&nbsp;</th><th class="team1 textcolor-title1">'+objSettings.lblEQUIPO+'</th>';
+        html += '<th class="der textcolor-title1">'+objSettings.lblPJ+'</th><th class="der textcolor-title1">'+objSettings.lblPG;
+        html += '</th><th class="der textcolor-title1">'+objSettings.lblPTS+'</th>';
+        html += '</tr></tbody></table>';
+        
+        html += '<div class="scroll" id="navigation_list"><table class="datos"><tbody>';
+        
+        html += htmlData;
+        
+        html += '</tbody></table></div> <!-- END SCROLL -->';
+        
+        html += '<div class="wdg_teams_classification_01_cnt"><div class="carousel_nav">';
+        html += '<a class="prev bginactive" title="'+objSettings.lblPrev+'" href="#"><i class="tvsa-caret-up"></i></a>';
+        html += '<a class="next bgactive" title="'+objSettings.lblNext+'" href="#"><i class="tvsa-caret-down"></i></a>';
+        html += '<table class="ver_todos"><tbody><tr><td><a href="'+objSettings.urlWidget+'">'+objSettings.lblViewMore+'</a></td></tr></tbody></table></div>';
+        html += '<div class="wdg_stadistics_01_clear"></div></div><div class="degraded"></div>';
+        html += '</div>';
 
         return html;
     };
