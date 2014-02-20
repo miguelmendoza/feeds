@@ -21,7 +21,7 @@
         }
         
         $objGlobal = $(this);
-        urlToken = objGlobal.idTorneo+'/tablafase_'+objGlobal.idFase+'.js';
+        urlToken = objGlobal.idTorneo+'/phases.js';
         jsonpCallback = 'phasesbytorneo';
         
         token();
@@ -30,14 +30,41 @@
 
     };
     
+    var token = function () {
+
+        $.ajax({
+            type: 'GET',
+            url: 'http://static-televisadeportes.esmas.com/sportsdata/futbol/data/'+urlToken,
+            async: false,
+            jsonpCallback: jsonpCallback,
+            contentType: "application/json",
+            dataType: 'jsonp',
+            cache: false,
+            success: successData,
+            error: function(xhr, ajaxOptions, thrownError) {
+                $objGlobal.html('');
+            }
+        });
+    };
+    
+    var successData = function ( data ) {
+        var html = "";
+        html = createHTML( data );
+        
+        $objGlobal.delay( 8000 ).html( html );
+        
+        $objGlobal.children('div').fadeIn( 4000 );
+    }
+    
     var token2 = function () {
         
         $objGlobal.html(objSettings.loading);
 
         $.ajax({
             type: 'GET',
-            url: 'http://feeds-televisadeportes.dev/data/'+domain,
-            async: false,
+            //url: 'http://static-televisadeportes.esmas.com/sportsdata/futbol/data/'+urlToken,
+            url: ''+urlToken,
+            async: true,
             jsonpCallback: jsonpCallback,
             contentType: "application/json",
             dataType: 'jsonp',
@@ -57,11 +84,15 @@
         
         for( var i=0 ; i<data.dataFases.length ; i++ )  {
             idTorneo = data.idTorneo;
-            domain = idTorneo+'/tablageneral.js';
+            urlToken = idTorneo+'/teamsclassification.js';
             jsonpCallback = 'teamsClassification';
             token2();
         }
         
+        if( arrItems.length === 0 ){
+            return html;
+        }
+
         html += '<div class="wdg_smex_groups_01" data-enhance="false" style="display:none">';
           html += '<div class="scroll">';
             
