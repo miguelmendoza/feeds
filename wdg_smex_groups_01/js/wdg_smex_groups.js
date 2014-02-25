@@ -62,8 +62,7 @@
 
         $.ajax({
             type: 'GET',
-            //url: 'http://static-televisadeportes.esmas.com/sportsdata/futbol/data/'+urlToken,
-            url: ''+urlToken,
+            url: 'http://static-televisadeportes.esmas.com/sportsdata/futbol/data/'+urlToken,
             async: true,
             jsonpCallback: jsonpCallback,
             contentType: "application/json",

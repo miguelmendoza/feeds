@@ -1,6 +1,4 @@
 ;(function( $ ) {
-    
-    var $objGlobal = false;
     var objSettings = false;
     
     $.fn.stadisticDT = function( params ) {
@@ -21,17 +19,17 @@
             return '';
         }
         
-        $objGlobal = $(this);
+        var $objGlobal = $(this);
         objSettings = settings;
         urlToken = 'coaches/coach_'+settings.idDT+'.js';
         jsonpCallback = 'stadisticDT';
         
-        token();
+        token( $objGlobal );
         return this;
 
     };
     
-    var token = function () {
+    var token = function ( $objGlobal ) {
 
         $.ajax({
             type: 'GET',
@@ -41,14 +39,14 @@
             contentType: "application/json",
             dataType: 'jsonp',
             cache: false,
-            success: successData,
+            success: function(data) { successData($objGlobal, data); } ,
             error: function(xhr, ajaxOptions, thrownError) {
                 $objGlobal.html('');
             }
         });
     };
     
-    var successData = function ( data ) {
+    var successData = function ( $objGlobal, data ) {
         var html = "";
         html = createHTML( data );
         
@@ -98,22 +96,6 @@
         
         return html;
     };
-    
-    
-    var loadimg = function( imgsrc ) {
-        
-        $objGlobal.find('mix_img').find('img').load( imgsrc, function ( response, status, xhr ) {
-            alert('La imagen se cargada');
-            
-            if ( status == "error" ) {
-      var msg = "Sorry but there was an error: ";
-      $( "#error" ).html( msg + xhr.status + " " + xhr.statusText );
-    }
-            
-          }
-        );
-        
-    };
-    
+   
 
 })(jQuery);

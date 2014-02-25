@@ -1,0 +1,378 @@
+@media screen {
+    .wdg_teams_classification_01{
+        display:block;
+		height:352px;
+        position:relative;
+		overflow:hidden;
+		width:100%;
+		*height:auto!important;
+    }
+    .ie7 .wdg_teams_classification_01 .scroll{
+        /*background-color:green;*/
+        height:606px!important;
+    }
+    .ie7 .wdg_teams_classification_01 table.datos tbody tr {
+	   height:52px;
+	   margin-bottom:10px;
+	}
+	.ie7 .wdg_teams_classification_01 table.datos tbody tr td{
+	    border-bottom: 1px solid #CCC!important;
+	    font-size: 14px;
+	    height:65px;
+	}
+	.ie7 .wdg_teams_classification_01 table.datos tbody tr td.team{
+        font-size: 14px;
+		width: 40%;
+		line-height: 30px;
+		text-align: left;
+		padding-left: 8px;
+		font-weight: bold;
+    }
+    .ie7 .wdg_teams_classification_01 .degraded{
+        display:none
+    }
+    .ie7 .wdg_teams_classification_01 .carousel_nav a.prev,
+    .ie7 .wdg_teams_classification_01 .carousel_nav a.next{
+        margin-top:137px;
+    }
+    
+    .wdg_teams_classification_01 .titulo .ancho{
+        font-size:14px;
+        font-weight:bold;
+    }
+    .wdg_teams_classification_01 table{
+        border-collapse: collapse;
+        border-spacing:0px;
+        width:96%;
+    }
+    .ie7 .wdg_teams_classification_01 table{
+        border-collapse: collapse;
+    }
+    .wdg_teams_classification_01 tr{
+       border-bottom:1px solid #CCC;
+    }
+    .wdg_teams_classification_01 td{
+        
+    }
+    .wdg_teams_classification_01 .izq{
+        font-size: 18px;
+        width:55px;
+        text-align:center;
+    }
+    .tvsa-hash{
+        font-size: 14px;
+    }
+    .ie7 .wdg_teams_classification_01 .izq{
+        width:30px;
+    }
+    .wdg_teams_classification_01 .team1{
+        font-size: 14px;
+        width:40%;
+        font-weight: bold;
+        line-height: 34px;
+        text-align: left;
+        padding-left: 8px;
+        padding-right:10px;
+    }
+    .wdg_teams_classification_01 .team{
+        font-size: 14px;
+        width:40%;
+        line-height: 30px;
+        text-align: left;
+        padding-left: 8px;
+        padding-right:5px;
+        font-weight:bold;
+        text-transform:uppercase;
+    }
+    .ie7 .wdg_teams_classification_01 .team{
+        width:55px;
+        padding-right:0px;
+    }
+    .wdg_teams_classification_01 .der{
+        text-align: center;
+        vertical-align: middle;
+        width: 32px;
+        font-size: 16px;
+        font-weight: bold;
+        padding-left: 3px;
+    }
+	.wdg_teams_classification_01 .der_img{
+        vertical-align: top;
+        width:24px;
+        height:18px;
+        padding:17px 0 0 11px;
+	}
+    .ie7 .wdg_teams_classification_01 .der{
+        width:30px;
+    }
+    .wdg_teams_classification_01 .datos .fondo{
+        font-weight:bold;
+        background-clip: border-box;
+        background-color: #E7E7E7  !important;
+        background-image: none;
+        background-origin: padding-box;
+        box-shadow: 0 4px 14px #CBCBCB inset;
+		line-height:50px;
+    }    
+    .wdg_teams_classification_01 .scroll{
+        overflow:auto;
+        width:105%;
+        height:215px;
+        overflow-x:hidden;
+    }
+    .wdg_teams_classification_01 div.str_pleca_01 {
+    	margin-bottom: 24px;
+    }
+    /*Para el carousel*/
+    .wdg_teams_classification_01 .carousel_nav{
+        display:none;
+    }
+    .wdg_teams_classification_01 .prev {
+        position:absolute;
+        border-top:1px solid #8e1818;
+        z-index:2;
+        top:574px;
+        left:0;
+        background: none repeat scroll 0 0 #AAAAAA;
+        display: block;
+        height: 27px;
+        line-height: 26px;
+        width: 29px;
+        text-align:center;
+        color:#000;
+    }
+    .wdg_teams_classification_01 .next {
+        position:absolute;
+        border-top:1px solid #8e1818;
+        z-index:2;
+        top:574px;
+        left:30px;
+        background: none repeat scroll 0 0 #AAAAAA;
+        display: block;
+        height: 27px;
+        line-height: 26px;
+        width: 29px;
+        text-align:center;
+        color:#FFF;
+    }
+    .wdg_teams_classification_01 .ver_todos {
+        margin-left:83px;
+        margin-top:18px;
+        border:none;
+        width:217px;
+        height:29px;
+        font-weight:bold;
+        font-size:14px;
+        background-clip: border-box;
+        background-color: #E4E4E4  !important;
+        background-image: none;
+        background-origin: padding-box;
+        box-shadow: 0 4px 14px #CBCBCB inset;
+		cellpadding:0; 
+		cellspacing:0;
+		border-collapse:collapse;
+    }
+    .wdg_teams_classification_01 .ver_todos td {
+        height:26px;
+        line-height:26px;
+        padding-left:24px;
+    }
+	.wdg_teams_classification_01 .seemore{
+        font-size: 12px;
+        font-style: normal;
+        font-weight: bold;
+        height: 24px;
+        width: 100%;
+        text-align: center;
+        border-top: 1px solid #dadada;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+        background-color: #dadada; 
+        height: 40px;
+    }
+    .wdg_teams_classification_01 .seemore a{
+        float: none;
+        height: 40px;
+        width: 100%;
+        text-align: center;
+        line-height: 40px;
+        background-color: 0;
+        color: #8f8f8f;
+        display: block;
+    }
+    /*Fin carousel*/
+    .wdg_teams_classification_01 .degraded{
+       bottom:50px;
+    }
+	.wdg_teams_classification_01 .carousel_nav .bgactive{
+		background-color:#398218;
+		border-top:1px solid #398218;
+	}
+	.wdg_teams_classification_01 .carousel_nav .bginactive{
+		background-color:#d7d7d7;
+		border-top:1px solid #d7d7d7;
+	}
+	
+	.wdg_teams_classification_01 .carousel_nav .bgactive i{
+		color:#FFF;
+	}
+	
+	.wdg_teams_classification_01 .carousel_nav .bginactive i{
+		color:#FFF;
+	}
+
+    .wdg_teams_classification_01 .carousel_nav .bgactive:hover {
+        background-color:#52ba23;
+        border-top:1px solid #52ba23;
+    }
+    .wdg_teams_classification_01 .textcolor-title1 {
+        color:#59a529;
+        font-size:14px;
+    }
+
+    /* dropdown */
+
+
+
+.wdg_teams_classification_01_grupos_listcontainer ul {
+background-color: #f5f5f5;
+z-index: 1000 !important;
+position: relative;
+visibility: hidden;
+cursor: pointer;
+}
+
+.wdg_teams_classification_01_grupos_listcontainer ul li p {
+margin-left: 20px;
+line-height: 34px;
+font-style: italic;
+font-weight: bold;
+}
+.wdg_teams_classification_01_grupos_listcontainer ul li {
+width: 100%;
+height: 34px;
+/* background-color: rgba(235,235,235,0.6); */
+background-color: rgba(235,235,235,0.6);
+border-bottom: 1px solid #d3d3d3;
+box-shadow: inset 0px 0px 8px 0px rgba(0,0,0,0.1);
+}
+
+.wdg_teams_classification_01_grupos_listcontainer ul li:hover {
+background-color: rgba(235,235,235,0.9);
+}
+.wdg_teams_classification_01_grupos .filter {
+    width: 73%;
+    position: relative;
+    float: left;
+    height: 33px;
+    }
+
+.wdg_teams_classification_01_grupos > span.title {
+position: relative;
+text-align: center;
+color: black;
+font-size: 13px;
+padding: 7px 1px 7px 5px;
+float: left;
+width: 78px;
+font-weight: bold;
+background-color: #f5f5f5;
+border-top: 1px solid #CCCCCC;
+border-bottom: 1px solid #CCCCCC;
+}
+
+.wdg_teams_classification_01_grupos:first-child span.title {
+border-top: 1px solid #CCCCCC;
+border-bottom: 1px solid #CCCCCC;
+}
+
+
+
+
+
+
+        
+    .wdg_teams_classification_01_grupos_dropdowncontent > span
+    {
+        float: right;
+        margin-top: 8px;
+        margin-right: 12px;
+        cursor: pointer;
+    }
+
+    .wdg_teams_classification_01_grupos_result_01_dropdown {
+            clear: both;
+            width: 100%;
+            height: 100%;
+            background-color: #d3d3d3;
+            box-shadow: inset 0px 0px 12px 4px rgba(0,0,0,0.05);
+            cursor: pointer;
+    }
+
+
+
+
+
+    .wdg_teams_classification_01_grupos_dropdown {
+            clear: both;
+            width: 100%;
+            height: 100%;
+            background-color: #E7E7E7;
+            -webkit-box-shadow: inset 0px 2px 8px 0px rgba(50, 50, 50, 0.25);
+            -moz-box-shadow:    inset 0px 2px 8px 0px rgba(50, 50, 50, 0.25);
+            box-shadow:         inset 0px 2px 8px 0px rgba(50, 50, 50, 0.25);
+            cursor: pointer;
+            border-bottom: 1px solid #CCC;
+
+
+    }
+
+
+    .wdg_teams_classification_01_grupos_dropdown {
+            clear: both;
+            width: 100%;
+            height: 100%;
+            
+            cursor: pointer;
+    }
+
+
+ .wdg_teams_classification_01_grupos_dropdowncontent > p
+    {
+        float: left;
+        padding-left: 15px;
+        padding-top: 9px;
+        font-size:13px;
+        font-weight:bold;
+    }
+
+.wdg_teams_classification_01_grupos_listcontainer {
+clear: both;
+}
+
+    .wdg_teams_classification_01_grupos_listcontainer ul::-webkit-scrollbar-thumb {
+        background: #d3d3d3;
+        -webkit-border-radius: 1ex;
+        -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
+    }
+    .wdg_teams_classification_01_grupos_listcontainer ul::-webkit-scrollbar {
+        height: 12px;
+        width: 12px;
+        background: #f5f5f5;
+    }
+
+    .wdg_teams_classification_01_grupos_listcontainer ul::-webkit-scrollbar-thumb {
+        background: #d3d3d3;
+        -webkit-border-radius: 1ex;
+        -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
+    }
+    .wdg_teams_classification_01_grupos_listcontainer ul::-webkit-scrollbar {
+        height: 12px;
+        width: 12px;
+        background: #f5f5f5;
+    }
+
+}
+
+

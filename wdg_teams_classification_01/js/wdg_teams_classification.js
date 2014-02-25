@@ -1,5 +1,4 @@
 ;(function($){
-    var $objGlobal = false;
     var objSettings = false;
     
     $.fn.teamsClassification = function( params ) {
@@ -25,21 +24,21 @@
             return '';
         } 
 
-        $objGlobal = $(this);
-        urlToken = objSettings.idTorneo+'/teamsclassification.js';
+        var $objGlobal = $(this);
+        var urlToken = objSettings.idTorneo+'/teamsclassification.js';
         jsonpCallback = 'teamsClassification';
         
         $objGlobal.html( objSettings.lblLoading );
         
-        token(urlToken);
+        token( $objGlobal, urlToken);
         
         return this;
 
     };
     
-    var successData = function ( data ) {
+    var successData = function ( $objGlobal, data ) {
         var html = "";
-        
+        console.log($objGlobal);
         switch( objSettings.template ) {
             case 'deportes': html = createHTML_Deportes( data ); break;
             case 'mundial': html = createHTML_Mundial( data ); break;
@@ -48,7 +47,7 @@
         $objGlobal.children('div').fadeIn( 4000 );
     }
     
-    var token = function () {
+    var token = function ( $objGlobal, urlToken ) {
 
         $.ajax({
             type: 'GET',
@@ -58,7 +57,9 @@
             contentType: "application/json",
             dataType: 'jsonp',
             cache: false,
-            success: successData,
+            success: function(data) {
+              successData( $objGlobal, data);
+            },
             error: function(xhr, ajaxOptions, thrownError) {
                 $objGlobal.html('');
             }
@@ -172,9 +173,14 @@
                 dataAux.nameTeam = dataAux.nameTeam.toUpperCase();
             }
             
+            
+            
             html += '<tr>';
-            html += '<td class="fondo izq textcolor-title2">'+dataAux.position+'</td>';
-            html += '<td class="der_img textcolor-title2"><img src="'+dataAux.urlLogoClub+'" alt="'+dataAux.nameTeam+'"></td>';
+            html += '<td class="fondo izq textcolor-title2">'+dataAux.position+'</td>  <td class="der_img textcolor-title2">';
+            
+            html += ( dataAux.urlLogoClub ) ? '<img src="'+dataAux.urlLogoClub+'" alt="'+dataAux.nameTeam+'">' : '';
+
+            html += '</td>';
             html += '<td class="team">'+dataAux.nameTeam+'</td>';
             html += '<td class="der textcolor-title2">'+dataAux.dataEstadisticas.JJ+'</td>';
             html += '<td class="der textcolor-title2">'+dataAux.dataEstadisticas.JG+'</td>';
