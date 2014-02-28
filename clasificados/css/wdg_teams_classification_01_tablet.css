@@ -5,7 +5,7 @@
         margin-bottom: 36px;
         clear: both;
 		overflow: hidden;
-		height:328px;
+		height:341px;
 		position:relative;
     }
     
@@ -14,7 +14,7 @@
 	}
 	.wdg_teams_classification_01 .scroll{
 		overflow:auto;
-		height:203px;
+		height:217px;
 		width:317px;
 		overflow-x:hidden;
 	}	

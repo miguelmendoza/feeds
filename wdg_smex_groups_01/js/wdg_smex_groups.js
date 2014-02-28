@@ -1,75 +1,45 @@
 ;(function( $ ) {
-    
-    var $objGlobal = false;
-    var objSettings = false;
     var arrItems = new Array();
     
     $.fn.gruposTeams = function( params ) {
 
-        objGlobal = $.extend( {
+        var objSettings = $.extend( {
             idTorneo: false,
-            idFase: false,
+            idTeam: false,
             lblJJ: "JJ",
             lblJG: "JG",
             lblJE: "JE",
             lblJP: "JP",
             lblPTS: "PTS",
+            test: false
         }, params);
 
-        if ( !objGlobal.idTorneo ) {
+        if ( !objSettings.idTorneo && !objSettings.idTeam ) {
             return '';
         }
-        
-        $objGlobal = $(this);
-        urlToken = objGlobal.idTorneo+'/phases.js';
-        jsonpCallback = 'phasesbytorneo';
-        
-        token();
-        
+
+        var $objGlobal = $(this);
+        token_fases( $objGlobal, objSettings );
+
         return this;
-
     };
     
-    var token = function () {
+    var token_fases = function ( $objGlobal, objSettings ) {
 
+        var domain = ( objSettings.test ) 
+            ? 'http://feeds-miportal.appspot.com/phases.js'
+                : 'http://static-televisadeportes.esmas.com/sportsdata/futbol/data/'+objSettings.idTorneo+'/phases.js';
+        
         $.ajax({
             type: 'GET',
-            url: 'http://static-televisadeportes.esmas.com/sportsdata/futbol/data/'+urlToken,
+            url: domain,
             async: false,
-            jsonpCallback: jsonpCallback,
+            jsonpCallback: 'phasesbytorneo',
             contentType: "application/json",
             dataType: 'jsonp',
             cache: false,
-            success: successData,
-            error: function(xhr, ajaxOptions, thrownError) {
-                $objGlobal.html('');
-            }
-        });
-    };
-    
-    var successData = function ( data ) {
-        var html = "";
-        html = createHTML( data );
-        
-        $objGlobal.delay( 8000 ).html( html );
-        
-        $objGlobal.children('div').fadeIn( 4000 );
-    }
-    
-    var token2 = function () {
-        
-        $objGlobal.html(objSettings.loading);
-
-        $.ajax({
-            type: 'GET',
-            url: 'http://static-televisadeportes.esmas.com/sportsdata/futbol/data/'+urlToken,
-            async: true,
-            jsonpCallback: jsonpCallback,
-            contentType: "application/json",
-            dataType: 'jsonp',
-            cache: false,
-            success: function(data){
-                arrItems.push(data);
+            success: function(data) {
+              token_team( $objGlobal, objSettings, data );
             },
             error: function(xhr, ajaxOptions, thrownError) {
                 $objGlobal.html('');
@@ -77,71 +47,105 @@
         });
     };
     
-    var createHTML = function ( data ) {
-        var html = '';
-        var idTorneo = "";
+   
+    var token_team = function ( $objGlobal, objSettings, data_Fases ) {
         
-        for( var i=0 ; i<data.dataFases.length ; i++ )  {
-            idTorneo = data.idTorneo;
-            urlToken = idTorneo+'/teamsclassification.js';
-            jsonpCallback = 'teamsClassification';
-            token2();
-        }
+        var domain = ( objSettings.test ) 
+            ? 'http://feeds-miportal.appspot.com/teamsclassification.js'
+              : 'http://static-televisadeportes.esmas.com/sportsdata/futbol/data/'+data_Fases.idTorneo+'/teamsclassification.js';
         
-        if( arrItems.length === 0 ){
-            return html;
-        }
+        $objGlobal.html(objSettings.loading);
 
-        html += '<div class="wdg_smex_groups_01" data-enhance="false" style="display:none">';
-          html += '<div class="scroll">';
+        $.ajax({
+            type: 'GET',
+            url: domain,
+            async: true,
+            jsonpCallback: 'teamsClassification',
+            contentType: "application/json",
+            dataType: 'jsonp',
+            cache: false,
+            success: function(data_grupos){
+                successData( $objGlobal, objSettings, data_Fases , data_grupos );
+            },
             
-            for( var i=0 ; i<data.dataFases.length ; i++ )  {
-            
-              html += '<div class="titulo_goal textcolor-title4">'+data.dataFases[i].nombreFase+'</div>';
-              html += '<div class="goal">';
-                html += '<ul class="head_team textcolor-title4">';
-                  html += '<li>'+objGlobal.lblJJ+'</li>';
-                  html += '<li>'+objGlobal.lblJG+'</li>';
-                  html += '<li>'+objGlobal.lblJE+'</li>';
-                  html += '<li>'+objGlobal.lblJP+'</li>';
-                  html += '<li>'+objGlobal.lblPTS+'</li>';
-                html += '</ul>';
-                html += '<div class="team_divisor">';
-                  html += '<ul class="team">';
-                    
-                        for( var k=0 ; k < data.dataFases[i].dataJornadas.length ; k++ )
-                        {
-                            for( var j=0 ; j < arrItems[0].dataEstadistica.length ; j++ )
-                            {
-                                if( data.dataFases[i].dataJornadas[k].idTeam == arrItems[0].dataEstadistica[j].idTeam )
-                                {
-                                    html += '<li class="first_child dotted-right"><p>'+arrItems[0].dataEstadistica[j].nameTeam+'</p></li>';
-                                    html += '<li class="textcolor-title4 dotted-right"><p>'+arrItems[0].dataEstadistica[j].dataEstadisticas.JJ+'</p></li>';
-                                    html += '<li class="textcolor-title4 dotted-right"><p>'+arrItems[0].dataEstadistica[j].dataEstadisticas.JG+'</p></li>';
-                                    html += '<li class="textcolor-title4 dotted-right"><p>'+arrItems[0].dataEstadistica[j].dataEstadisticas.JE+'</p></li>';
-                                    html += '<li class="textcolor-title4 dotted-right"><p>'+arrItems[0].dataEstadistica[j].dataEstadisticas.JP+'</p></li>';
-                                    html += '<li class="last_child textcolor-title4"><p>'+arrItems[0].dataEstadistica[j].dataEstadisticas.PTS+'</p></li>';
-                                }
-                            }
-                        }
-                  html += '</ul>';
-                html += '</div>';
-              html += '</div>';
-            
+            error: function(xhr, ajaxOptions, thrownError) {
+                $objGlobal.html('');
             }
-            
-          html += '</div>';
-        html += '</div>';
-
-        return html;
+        });
     };
     
-    var successData = function ( data ) {
+     var successData = function ( $objGlobal, objSettings, data_Fases , data_grupos  ) {
         var html = "";
-        html = createHTML( data );
-        
+
+        html = createHTML( $objGlobal, objSettings, data_Fases , data_grupos );
         $objGlobal.delay( 8000 ).html( html );
         $objGlobal.children('div').fadeIn( 4000 );
     }
+    
+    
+    var createHTML = function ( $objGlobal, objSettings, data_Fases , data_grupos ) {
+        var html = '';
+        var campos = [];
+        var idGroupbyTeam = [];
+        var idPhasebyTeam = [];
+        
+        if( data_Fases.dataFases.length === 0 ){
+            return html;
+        }
+        
+        for( var i=0 ; i<data_Fases.dataFases.length ; i++ )  {
+            for( var k=0 ; k < data_Fases.dataFases[i].dataJornadas.length ; k++ ) {
+                if( data_Fases.dataFases[i].dataJornadas[k].idTeam == objSettings.idTeam ) { 
+                    idPhasebyTeam.push(data_Fases.dataFases[i].idFase);
+                    idGroupbyTeam.push(data_Fases.dataFases[i].dataJornadas[k].group);
+                }
+            }
+        }
+        
+        html += '<div class="wdg_smex_groups_01" data-enhance="false" style="display:none">';
+          html += '<div class="scroll">';
+        
+          for( var i=0 ; i<data_Fases.dataFases.length ; i++ )  {
+              if ( idPhasebyTeam.indexOf( data_Fases.dataFases[i].idFase ) > -1 ) {
+                  
+                  html += '<div class="titulo_goal textcolor-title4">'+data_Fases.dataFases[i].nombreFase+'</div>';
+                    html += '<div class="goal">';
+                      html += '<ul class="head_team textcolor-title4">';
+                        html += '<li>'+objSettings.lblJJ+'</li>';
+                        html += '<li>'+objSettings.lblJG+'</li>';
+                        html += '<li>'+objSettings.lblJE+'</li>';
+                        html += '<li>'+objSettings.lblJP+'</li>';
+                        html += '<li>'+objSettings.lblPTS+'</li>';
+                      html += '</ul>';
+                      html += '<div class="team_divisor">';
+                        html += '<ul class="team">';
+                        
+                        for( var k=0 ; k < data_Fases.dataFases[i].dataJornadas.length; k++ ) {
+                            if ( idGroupbyTeam.indexOf( data_Fases.dataFases[i].dataJornadas[k].group ) > -1 ) {
+                                for( var j=0 ; j < data_grupos.dataEstadistica.length; j++ )
+                                {
+                                    if( data_Fases.dataFases[i].dataJornadas[k].idTeam == data_grupos.dataEstadistica[j].idTeam )
+                                    {
+                                        html += '<li class="first_child dotted-right"><p>'+data_grupos.dataEstadistica[j].nameTeam+'</p></li>';
+                                        html += '<li class="textcolor-title4 dotted-right"><p>'+data_grupos.dataEstadistica[j].dataEstadisticas.JJ+'</p></li>';
+                                        html += '<li class="textcolor-title4 dotted-right"><p>'+data_grupos.dataEstadistica[j].dataEstadisticas.JG+'</p></li>';
+                                        html += '<li class="textcolor-title4 dotted-right"><p>'+data_grupos.dataEstadistica[j].dataEstadisticas.JE+'</p></li>';
+                                        html += '<li class="textcolor-title4 dotted-right"><p>'+data_grupos.dataEstadistica[j].dataEstadisticas.JP+'</p></li>';
+                                        html += '<li class="last_child textcolor-title4"><p>'+data_grupos.dataEstadistica[j].dataEstadisticas.PTS+'</p></li>';
+                                    }
+                                }
+                                
+                            }
+                        }
+                        html += '</ul>';
+                      html += '</div>';
+                    html += '</div>';
+              }
+          }
+          html += '</div>';
+        html += '</div>';
+        
+        return html;
+    };
 
 })(jQuery);

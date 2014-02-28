@@ -1,6 +1,6 @@
 @media screen and (min-width: 948px){  
  .wdg_teams_classification_01{
-		height:606px;
+		height:342px;
 		position:relative;
     }  
  .wdg_teams_classification_01 .carousel_nav{
@@ -14,7 +14,7 @@
 	}
  .wdg_teams_classification_01 .scroll{
         overflow:hidden;
-        height: 476px;
+        height: 218px;
 		width:106%;
 		overflow-y:scroll;
     }
